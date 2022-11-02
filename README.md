@@ -11,17 +11,11 @@ By using the Autel Mobile SDK, developers can automate flight, control the camer
 
 EVO II V3 Series
 
-## Compile Notes
-
-Follow the steps below to add “SDK package” to the project. (Note: this is currently supported only in the Android Studio environment):
-
-1. Add “url https://dl.bintray.com/auteloss/android” to the application-level build.gradle file
-
 ## Android MSDK Release Notes
 
 ### Release Date
 
-2022.10.10
+2022.11.2
 
 ### Update Description
 

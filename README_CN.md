@@ -10,11 +10,6 @@
 
 EVO II V3 Series
 
-## 编译注意事项
-
-Follow the steps below to add “SDK package” to the project. (Note: this is currently supported only in the Android Studio environment):
-1. Add “url https://dl.bintray.com/auteloss/android” to the application-level build.gradle file
-
 ## Android MSDK 正式版发布记录
 
 ### 发布日期
