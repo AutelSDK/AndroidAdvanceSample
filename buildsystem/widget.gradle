@@ -1,0 +1,14 @@
+ext{
+    //widget
+    recyclerViewVersion = '23.3.0'
+    cardViewVersion = '23.0.1'
+    aChartEngineVersion = '1.1.0'
+    pull2RefreshVersion = '1.0.2'
+
+    widgetDependencies = [
+            recyclerView : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+            cardView : "com.android.support:support-v4:${cardViewVersion}",
+            aChartEngine : "org.achartengine:achartengine:${aChartEngineVersion}",
+            pull2Refresh : "com.handmark:pull-to-refresh:${pull2RefreshVersion}@aar"
+    ]
+}

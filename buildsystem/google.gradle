@@ -1,0 +1,24 @@
+ext{
+    gmsVersion = '8.4.0'
+    appcompatVersion = '23.0.1'
+    supportV4Version = '23.0.1'
+    gsYoutubeVersion = 'v3-rev136-1.20.0'
+    gaClientVersion = '1.20.0'
+    gsonVersion = "2.7"
+    androidAnnotationsVersion = "23.0.1"
+
+    googleSdkDependencies = [
+            supportV4 : "com.android.support:support-v4:${supportV4Version}",
+            appcompatV7 : "com.android.support:appcompat-v7:${appcompatVersion}",
+            gmsMaps : "com.google.android.gms:play-services-maps:${gmsVersion}",
+            gmsAnalytics : "com.google.android.gms:play-services-analytics:${gmsVersion}",
+            gsYoutube : "com.google.apis:google-api-services-youtube:${gsYoutubeVersion}",
+            gaClient : "com.google.api-client:google-api-client:${gaClientVersion}",
+            gaClientAndroid : "com.google.api-client:google-api-client-android:${gaClientVersion}",
+            gaClientHttp : "com.google.http-client:google-http-client:${gaClientVersion}",
+            gaClientHttpAndroid : "com.google.http-client:google-http-client-android:${gaClientVersion}",
+            gaClientHttpGson : "com.google.http-client:google-http-client-gson:${gaClientVersion}",
+            gson : "com.google.code.gson:gson:${gsonVersion}",
+            androidAnnoTations : "com.android.support:support-annotations:${androidAnnotationsVersion}"
+    ]
+}

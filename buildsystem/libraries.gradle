@@ -1,0 +1,35 @@
+ext{
+    //Libraries
+    rxJavaVersion = '1.1.6'
+    rxAndroidVersion = '1.2.1'
+    gsonVersion = '2.7'
+    okHttpVersion = '3.4.0-RC1'
+    okIOVersion = '1.9.0'
+    retrofitVersion = '2.1.0'
+    imageLoaderVersion = '1.9.4'
+    commonsCodecVersion = '1.5'
+    gifDrawableVersion = '1.1.17'
+    imageLoaderVersion = '1.9.4'
+    glideVersion = '3.7.0'
+    httpClientVersioon = '4.2.5'
+    httpCoreVersioon = '4.2.4'
+    hamcrestVersion = '1.3'
+    autelSdkDependencies = [
+            rxJava : " io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConvertGson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapterRxJava : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+
+            okHttp : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okIO : "com.squareup.okio:okio:${okIOVersion}",
+
+            glide : "com.github.bumptech.glide:glide:${glideVersion}",
+            commonsCodec : "org.apache:commons-codec:${commonsCodecVersion}",
+            gifDrawable : "pl.droidsonroids.gif:android-gif-drawable:${gifDrawableVersion}",
+            universalimageloader : "com.nostra13.universalimageloader:universal-image-loader:${imageLoaderVersion}",
+            httpCore : "org.apache.httpcomponents:httpcore:${httpCoreVersioon}",
+            httpClient : " org.apache.httpcomponents:httpclient:${httpClientVersioon}",
+            hamcrestCore : "org.hamcrest:hamcrest-core:${hamcrestVersion}"
+    ]
+}

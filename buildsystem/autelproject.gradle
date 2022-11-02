@@ -1,0 +1,12 @@
+ext{
+    //autel project
+    autelSdkVersion = '1.1.4'
+    mobileHelpVersion = '1.0.0'
+    downloaderVersion = '1.0.7'
+
+    autelProjectDependencies = [
+            autelSdk : "com.autel.starlink:autelsdk:${autelSdkVersion}",
+            mobileHelp : "com.autel.starlink:mobilehelp:${mobileHelpVersion}@aar",
+            autelDownloader : "com.autel.starlink:downloader:${downloaderVersion}"
+    ]
+}

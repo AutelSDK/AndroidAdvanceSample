@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="app/src/main/java"/>
+	<classpathentry kind="src" path="camera/src/androidTest/java"/>
+	<classpathentry kind="src" path="camera/src/main/java"/>
+	<classpathentry kind="src" path="camera/src/test/java"/>
+	<classpathentry kind="src" path="libbase/src/main/java"/>
+	<classpathentry kind="src" path="libcore/src/main/java"/>
+	<classpathentry kind="src" path="libupdrage/src/main/java"/>
+	<classpathentry kind="src" path="sdkLib/src/main/java"/>
+	<classpathentry kind="src" path="service1.0/src/main/java"/>
+	<classpathentry kind="src" path="service2.0/src/main/java"/>
+	<classpathentry kind="src" path="xLog/src/main/java"/>
+	<classpathentry kind="lib" path="app/libs/Android_Map3D_SDK_V5.0.0_20170311.jar"/>
+	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="libbase/libs/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="service1.0/libs/hamcrest-core-1.3-sources.jar"/>
+	<classpathentry kind="lib" path="service1.0/libs/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="service1.0/libs/httpcore-4.2.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="C:\Users\R22449\AppData\Local\Android\Sdk\platforms\android-33\android.jar"/>
+	<classpathentry kind="lib" path="D:\auteldevelop\rxjava-2.1.2.jar"/>
+
+	<classpathentry kind="lib" path="D:\auteldevelop\gson-2.8.7.jar"/>
+
+	<classpathentry kind="lib" path="D:\auteldevelop\okhttp-4.7.2.jar"/>
+	<classpathentry kind="lib" path="D:\auteldevelop\support-annotations-25.3.1.jar"/>
+	<classpathentry kind="lib" path="D:\auteldevelop\annotations-13.0.jar"/>
+
+	<classpathentry kind="lib" path="D:\auteldevelop\eventbus-3.0.0.jar"/>
+
+  <classpathentry kind="lib" path="D:\auteldevelop\okio-2.6.0.jar"/>
+
+  <classpathentry kind="lib" path="D:\auteldevelop\support-annotations-25.3.1.jar"/>
+
+</classpath>

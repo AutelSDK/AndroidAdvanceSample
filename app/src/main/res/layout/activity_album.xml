@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20px">
+
+        <Button
+            android:id="@+id/getMedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:text="getMedia"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/appendMedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:text="appendMedia"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/getMedia_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:text="getMediaNext"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/deleteAllMedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:text="deleteMedia(delete a media list)"
+            android:textAllCaps="false" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:background="@drawable/text_background"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/deleteMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="deleteMedia"
+                android:textAllCaps="false" />
+
+            <Spinner
+                android:id="@+id/mediaList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:background="@drawable/text_background"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/getVideoResolutionFromHttpHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="getVideoResolutionFromHttpHeader"
+                android:textAllCaps="false" />
+
+            <Spinner
+                android:id="@+id/videoResolutionFromHttpHeaderList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:background="@drawable/text_background"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/downloadVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="downloadVideoThumbnail"
+                android:textAllCaps="false" />
+
+            <Spinner
+                android:id="@+id/videoDownloadList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_bottom"
+            android:background="@drawable/text_background"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/getVideoResolutionFromLocalFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="getVideoResolutionFromLocalFile"
+                android:textAllCaps="false" />
+
+            <Spinner
+                android:id="@+id/videoResolutionFromLocalFileList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20px">
+
+            <Button
+                android:id="@+id/getFmcMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="getFmcMedia"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/appendFmcMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="appendMedia"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/getFmcMedia_Next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="getFmcMediaNext"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/deleteFmcAllMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:gravity="center"
+                android:padding="@dimen/text_padding"
+                android:text="deleteFmcMedia(delete a media list)"
+                android:textAllCaps="false" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:background="@drawable/text_background"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/deleteFmcMedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/text_padding"
+                    android:text="deleteFmcMedia"
+                    android:textAllCaps="false" />
+
+                <Spinner
+                    android:id="@+id/mediaFmcList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:background="@drawable/text_background"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/getFmcVideoResolutionFromHttpHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/text_padding"
+                    android:text="getFmcVideoResolutionFromHttpHeader"
+                    android:textAllCaps="false" />
+
+                <Spinner
+                    android:id="@+id/FmcvideoResolutionFromHttpHeaderList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:background="@drawable/text_background"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/downloadFmcVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/text_padding"
+                    android:text="downloadFmcVideoThumbnail"
+                    android:textAllCaps="false" />
+
+                <Spinner
+                    android:id="@+id/FmcvideoDownloadList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_bottom"
+                android:background="@drawable/text_background"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/getFmcVideoResolutionFromLocalFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/text_padding"
+                    android:text="getVideoResolutionFromLocalFile"
+                    android:textAllCaps="false" />
+
+                <Spinner
+                    android:id="@+id/FmcvideoResolutionFromLocalFileList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

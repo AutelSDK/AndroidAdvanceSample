@@ -1,0 +1,14 @@
+ext{
+    //third part service
+    AMapVersion = '3.3.0_20160331'
+    leakCanaryVersion = '1.4:beta2'
+    squareHahaVersion = '2.0.3'
+
+    thirdServiceDependencies = [
+            AMap : "com.amap:3DMap:${AMapVersion}",
+            leakCanaryAndroid : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}@aar",
+            leakCanaryWatcher : "com.squareup.leakcanary:leakcanary-watcher:${leakCanaryVersion}@aar",
+            leakCanaryAnalyzer : "com.squareup.leakcanary:leakcanary-analyzer:${leakCanaryVersion}@aar",
+            squareHaha : "com.squareup.haha:haha:${squareHahaVersion}"
+    ]
+}
