@@ -4,11 +4,14 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+
 import androidx.annotation.NonNull;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithOneParam;
 import com.autel.common.album.MediaInfo;
@@ -128,6 +131,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -155,6 +162,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.appendMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -182,6 +193,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getMedia_Next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -211,6 +226,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.deleteAllMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.deleteMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -230,6 +249,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.deleteMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.deleteMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -249,6 +272,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getVideoResolutionFromHttpHeader).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -277,6 +304,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getVideoResolutionFromLocalFile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 VideoResolutionAndFps data = mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
                 if (null != data) {
                     logOut("getVideoResolutionFromLocalFile  data size " + data);
@@ -291,6 +322,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getFmcMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getFMCMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -318,6 +353,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.appendFmcMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getFMCMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -345,6 +384,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getFmcMedia_Next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getFMCMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -374,6 +417,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.deleteFmcAllMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.deleteFMCMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -393,6 +440,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.deleteFmcMedia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.deleteFMCMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -412,6 +463,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getFmcVideoResolutionFromHttpHeader).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getFMCVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -440,7 +495,12 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
         findViewById(R.id.getFmcVideoResolutionFromLocalFile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VideoResolutionAndFps data = mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                VideoResolutionAndFps data =
+                mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
                 if (null != data) {
                     logOut("getVideoResolutionFromLocalFile  data size " + data);
                 } else {

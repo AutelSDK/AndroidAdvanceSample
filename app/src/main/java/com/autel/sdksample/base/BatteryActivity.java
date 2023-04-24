@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -50,6 +51,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (isEmpty(lowBatteryRange.getText().toString())) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     BatteryParameterRangeManager batteryParameterRangeManager = mController.getParameterSupportManager();
                     RangePair<Float> support = batteryParameterRangeManager.getLowBattery();
                     lowBatteryRange.setText("low battery range from " + support.getValueFrom() + " to " + support.getValueTo());
@@ -72,6 +77,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (isEmpty(criticalBatteryRange.getText().toString())) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     BatteryParameterRangeManager batteryParameterRangeManager = mController.getParameterSupportManager();
                     RangePair<Float> support = batteryParameterRangeManager.getCriticalBattery();
                     criticalBatteryRange.setText("critical battery range from " + support.getValueFrom() + " to " + support.getValueTo());
@@ -93,6 +102,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (isEmpty(dischargeDayRange.getText().toString())) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     BatteryParameterRangeManager batteryParameterRangeManager = mController.getParameterSupportManager();
                     RangePair<Integer> support = batteryParameterRangeManager.getDischargeDay();
                     dischargeDayRange.setText("discharge day range from " + support.getValueFrom() + " to " + support.getValueTo());
@@ -117,6 +130,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getLowBatteryNotifyThreshold).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getLowBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -134,6 +151,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void onClick(View v) {
                 String value = lowBatteryNotifyThreshold.getText().toString();
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setLowBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -152,6 +173,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void onClick(View v) {
                 for(int index = 0; index <3;index++){
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     mController.getCriticalBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
                         @Override
                         public void onFailure(AutelError error) {
@@ -170,6 +195,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void onClick(View v) {
                 String value = criticalBatteryNotifyThreshold.getText().toString();
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setCriticalBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -186,6 +215,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getDischargeDay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getDischargeDay(new CallbackWithOneParam<Integer>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -203,6 +236,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             @Override
             public void onClick(View v) {
                 String value = dischargeDay.getText().toString();
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setDischargeDay(isEmpty(value) ? 2 : Integer.valueOf(value), new CallbackWithNoParam() {
                     @Override
                     public void onSuccess() {
@@ -220,6 +257,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getDischargeCount).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getDischargeCount(new CallbackWithOneParam<Integer>() {
                     @Override
                     public void onSuccess(Integer data) {
@@ -236,6 +277,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getVersion).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getVersion(new CallbackWithOneParam<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -252,6 +297,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getSerialNumber).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getSerialNumber(new CallbackWithOneParam<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -268,6 +317,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getFullChargeCapacity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getFullChargeCapacity(new CallbackWithOneParam<Integer>() {
                     @Override
                     public void onSuccess(Integer data) {
@@ -284,6 +337,10 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
         findViewById(R.id.getCellVoltageRange).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getParameterSupportManager().getBatteryCellVoltageRange(new CallbackWithOneParam<RangePair<Integer>>() {
                     @Override
                     public void onSuccess(RangePair<Integer> data) {

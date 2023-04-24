@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -72,6 +73,10 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
                     logOut("setCurrentRFData  error  has not select a RF Hz");
                     return;
                 }
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setCurrentRFData(selectedRFHz, 3, new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -89,6 +94,10 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
         findViewById(R.id.getCurrentRFStart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getCurrentRFData(3, new CallbackWithOneParam<RFData>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -106,6 +115,10 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
         findViewById(R.id.getRFListStart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getRFDataList(3, new CallbackWithOneParam<List<RFData>>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -125,6 +138,10 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
         findViewById(R.id.getVersionInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getVersionInfo(new CallbackWithOneParam<DspVersionInfo>() {
                     @Override
                     public void onSuccess(DspVersionInfo dspVersionInfo) {

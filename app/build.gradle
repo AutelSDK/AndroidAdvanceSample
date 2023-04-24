@@ -11,6 +11,14 @@ android {
         }
     }
     compileSdkVersion 29
+    buildToolsVersion '28.0.3'
+
+    packagingOptions {
+//        pickFirst 'lib/armeabi-v7a/libwhitename.so'
+        pickFirst 'lib/arm64-v8a/libwhitename.so'
+//        pickFirst 'lib/armeabi-v7a/libAutelUtil.so'
+        pickFirst 'lib/arm64-v8a/libAutelUtil.so'
+    }
     defaultConfig {
         applicationId "com.autel.maxlink"
         minSdkVersion 19
@@ -20,6 +28,7 @@ android {
         versionName "V1.0.1.40"
         multiDexEnabled true
         signingConfig signingConfigs.config
+        ndkVersion '21.4.7075529'
     }
     buildTypes {
         release {
@@ -39,6 +48,10 @@ android {
     }
     productFlavors {
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
@@ -56,7 +69,7 @@ dependencies {
     //*
 //    implementation project(':sdk')
 
-    compile(name: "autel-sdk-release", ext: "aar")
+    implementation(name: "autel-sdk-release", ext: "aar")
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -73,10 +86,10 @@ dependencies {
 
     implementation('com.squareup.okhttp3:okhttp:4.7.2')
     //    compile autelSdkDependencies.okIO
-//    api 'io.reactivex.rxjava2:rxjava:2.1.2'
-//    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.1.2'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
 //    api files('libs/commons-codec-1.5.jar')
-//    api 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.7'
 //    api "androidx.annotation:annotation:1.0.0"
 }

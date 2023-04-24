@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -61,6 +62,10 @@ public class AMapMissionActivity extends MapActivity {
     }
 
     private void attachTapListener() {
+        if (mAmap == null) {
+            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
+            return;
+        }
         mAmap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -80,6 +85,10 @@ public class AMapMissionActivity extends MapActivity {
     }
 
     private void detachTapListener() {
+        if (mAmap == null) {
+            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
+            return;
+        }
         mAmap.setOnMapClickListener(null);
     }
 
@@ -117,8 +126,10 @@ public class AMapMissionActivity extends MapActivity {
         }
 
         Marker temp = addMarkerWithLabel(latlng);
-        temp.setDraggable(true);
-        mMarkerList.add(temp);
+        if (temp != null) {
+            temp.setDraggable(true);
+            mMarkerList.add(temp);
+        }
     }
 
 
@@ -166,6 +177,10 @@ public class AMapMissionActivity extends MapActivity {
         markerOption.draggable(false);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.marker_point);
         markerOption.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
+        if (mAmap == null) {
+            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
+            return null;
+        }
         return mAmap.addMarker(markerOption);
     }
 
@@ -202,7 +217,7 @@ public class AMapMissionActivity extends MapActivity {
                 if (degree < 0) {
                     degree = degree + 360;
                 }
-                if (mDroneMarker != null) {
+                if (mDroneMarker != null && mAmap != null) {
                     if (mAmap.getCameraPosition() != null) {
                         mDroneMarker.setRotateAngle((float) degree);
                     }
@@ -221,7 +236,9 @@ public class AMapMissionActivity extends MapActivity {
 //            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
 //                    R.mipmap.drone_location_icon)));
 //            markerOption.anchor(0.5f, 0.5f);
-            mPhoneMarker = mAmap.addMarker(markerOption);
+            if(mAmap != null){
+                mPhoneMarker = mAmap.addMarker(markerOption);
+            }
         } else {
             mPhoneMarker.setPosition(phonell);
         }

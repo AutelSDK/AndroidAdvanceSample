@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -59,6 +60,10 @@ public abstract class GimbalActivity extends BaseActivity<AutelGimbal> {
         findViewById(R.id.setGimbalWorkMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setGimbalWorkMode(gimbalWorkMode, new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -75,6 +80,10 @@ public abstract class GimbalActivity extends BaseActivity<AutelGimbal> {
         findViewById(R.id.getGimbalWorkMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getGimbalWorkMode(new CallbackWithOneParam<GimbalWorkMode>() {
                     @Override
                     public void onFailure(AutelError error) {
@@ -92,6 +101,10 @@ public abstract class GimbalActivity extends BaseActivity<AutelGimbal> {
         findViewById(R.id.getVersionInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.getVersionInfo(new CallbackWithOneParam<GimbalVersionInfo>() {
                     @Override
                     public void onSuccess(GimbalVersionInfo gimbalVersionInfo) {

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -117,6 +118,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
                 String value = returnHeightRangeNotify.getText().toString();
                 if (isEmpty(value)) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     FlyControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     if (null != parameterRangeManager) {
                         RangePair<Float> support = parameterRangeManager.getReturnHeightRange();
@@ -146,6 +151,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
                 String value = maxHeightRange.getText().toString();
                 if (isEmpty(value) && null != mController) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     FlyControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     if (null != parameterRangeManager) {
                         RangePair<Float> support = parameterRangeManager.getHeightRange();
@@ -175,6 +184,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
                 String value = maxRangeRange.getText().toString();
                 if (isEmpty(value)) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     FlyControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     if (null != parameterRangeManager) {
                         RangePair<Float> support = parameterRangeManager.getRangeOfMaxRange();
@@ -205,6 +218,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
                 String value = fcHorizontalSpeedValue.getText().toString();
                 if (isEmpty(value)) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     FlyControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     if (null != parameterRangeManager) {
                         RangePair<Float> support = parameterRangeManager.getHorizontalSpeedRange();
@@ -216,6 +233,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void setBeginnerModeState(boolean enable) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setBeginnerModeEnable(enable, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -230,6 +251,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getBeginnerModeState(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.isBeginnerModeEnable(new CallbackWithOneParam<Boolean>() {
             @Override
             public void onFailure(AutelError error) {
@@ -245,6 +270,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
 
     public void getMaxHeight(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getMaxHeight(new CallbackWithOneParam<Float>() {
             @Override
             public void onFailure(AutelError error) {
@@ -260,7 +289,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
     public void setMaxHeight(View view) {
         String value = fcMaxHeight.getText().toString();
-
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setMaxHeight(isEmpty(value) ? 80 : Integer.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -277,6 +309,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getMaxRange(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getMaxRange(new CallbackWithOneParam<Float>() {
             @Override
             public void onFailure(AutelError error) {
@@ -293,6 +329,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     public void setMaxRange(View view) {
         String value = fcMaxRange.getText().toString();
 
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setMaxRange(isEmpty(value) ? 500 : Integer.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -309,6 +349,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getReturnHeight(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getReturnHeight(new CallbackWithOneParam<Float>() {
             @Override
             public void onFailure(AutelError error) {
@@ -326,6 +370,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
     public void setReturnHeight(View view) {
         String value = fcReturnHeight.getText().toString();
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setReturnHeight(isEmpty(value) ? 30 : Integer.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -340,6 +388,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getHorizontalSpeed(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getMaxHorizontalSpeed(new CallbackWithOneParam<Float>() {
             @Override
             public void onFailure(AutelError error) {
@@ -356,6 +408,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
     public void setHorizontalSpeed(View view) {
         String value = fcHorizontalSpeed.getText().toString();
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setMaxHorizontalSpeed(isEmpty(value) ? 5 : Integer.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -370,6 +426,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void isAttiModeEnable(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.isAttitudeModeEnable(new CallbackWithOneParam<Boolean>() {
             @Override
             public void onFailure(AutelError error) {
@@ -384,6 +444,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void setAttiModeEnable(boolean enable) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setAttitudeModeEnable(enable, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -399,6 +463,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getLedPilotLamp(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getLedPilotLamp(new CallbackWithOneParam<LedPilotLamp>() {
             @Override
             public void onFailure(AutelError error) {
@@ -413,6 +481,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void setLedPilotLamp(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setLedPilotLamp(ledPilotLamp, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -429,6 +501,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     public void setLocationAsHomePoint(View view) {
         float lat = isEmpty(locationAsHomePoint_la.getText().toString()) ? 0 : Float.valueOf(locationAsHomePoint_la.getText().toString());
         float lon = isEmpty(locationAsHomePoint_lon.getText().toString()) ? 0 : Float.valueOf(locationAsHomePoint_lon.getText().toString());
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setLocationAsHomePoint(lat, lon, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -443,6 +519,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void setAircraftLocationAsHomePoint(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setAircraftLocationAsHomePoint(new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError error) {
@@ -457,6 +537,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void startCalibrateCompass(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.startCalibrateCompass(new CallbackWithOneParam<CalibrateCompassStatus>() {
             @Override
             public void onSuccess(CalibrateCompassStatus calibrateCompassStatus) {
@@ -471,6 +555,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void takeOff(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.takeOff(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -485,7 +573,11 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void land(View view) {
-        mController.land(false,new CallbackWithNoParam() {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
+        mController.land(false, new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
                 logOut("land onSuccess ");
@@ -499,6 +591,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void goHome(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.goHome(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -513,6 +609,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void cancelReturn(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.cancelReturn(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -527,6 +627,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void cancelLand(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.cancelLand(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -541,6 +645,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getVersionInfo(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getVersionInfo(new CallbackWithOneParam<FlyControllerVersionInfo>() {
             @Override
             public void onSuccess(FlyControllerVersionInfo flyControllerVersionInfo) {
@@ -555,6 +663,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void getSerialNumber(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getSerialNumber(new CallbackWithOneParam<String>() {
             @Override
             public void onSuccess(String serialNumber) {
@@ -569,6 +681,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void setCalibrateCompassListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setCalibrateCompassListener(new CallbackWithOneParam<CalibrateCompassStatus>() {
             @Override
             public void onFailure(AutelError error) {
@@ -583,10 +699,18 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void resetCalibrateCompassListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setCalibrateCompassListener(null);
     }
 
     public void setWarningListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setWarningListener(new CallbackWithTwoParams<ARMWarning, MagnetometerState>() {
 
             @Override
@@ -602,6 +726,10 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     }
 
     public void resetWarningListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setWarningListener(null);
     }
 }

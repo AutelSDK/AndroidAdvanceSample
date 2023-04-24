@@ -9,7 +9,9 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.autel.common.CallbackWithNoParam;
+import com.autel.common.SDKConfig;
 import com.autel.common.error.AutelError;
+import com.autel.internal.DeviceTypeManager;
 import com.autel.internal.sdk.util.AutelDirPathUtils;
 import com.autel.sdk.Autel;
 import com.autel.sdk.AutelSdkConfig;
@@ -55,6 +57,8 @@ public class TestApplication extends Application {
                 .setAppKey(appKey)
                 .setPostOnUi(true)
                 .create();
+        DeviceTypeManager.getInstance().setAdvance(true);
+        SDKConfig.setDevice(SDKConfig.DEVICE_ADVANCE);
         Autel.init(this, config, new CallbackWithNoParam() {
             @Override
             public void onSuccess() {

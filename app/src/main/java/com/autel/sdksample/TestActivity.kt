@@ -61,8 +61,8 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test)
         initView()
         setListener()
-
     }
+
 
     fun setResetFactory(view: View) {
         var deviceType: DeviceType = DeviceType.UNKNOWN
@@ -112,16 +112,7 @@ class TestActivity : AppCompatActivity() {
 
     var index = 0
     private fun setListener() {
-        (findViewById(R.id.Spinner) as Spinner).onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                index = position
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
-        }
-        (findViewById(R.id.resetGimbalAngle) as Button).setOnClickListener {
+        (findViewById(R.id.resetGimbalAngle) as Button)?.setOnClickListener {
             GimbalManager2.getInstance().resetGimbalAngle(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -136,7 +127,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setGimbalAngleRange) as TextView).setOnClickListener {
+        (findViewById(R.id.setGimbalAngleRange) as TextView)?.setOnClickListener {
             GimbalManager2.getInstance().queryGimbalAngleRange(object : CallbackWithOneParam<GimbalAngleRangeImpl> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -165,7 +156,7 @@ class TestActivity : AppCompatActivity() {
 
             })
         }
-        (findViewById(R.id.setGimbalAngleMax) as TextView).setOnClickListener {
+        (findViewById(R.id.setGimbalAngleMax) as TextView)?.setOnClickListener {
             GimbalManager2.getInstance().setGimbalAngleMax(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -180,7 +171,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setGimbalAngleMin) as TextView).setOnClickListener {
+        (findViewById(R.id.setGimbalAngleMin) as TextView)?.setOnClickListener {
             GimbalManager2.getInstance().setGimbalAngleMin(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -198,7 +189,7 @@ class TestActivity : AppCompatActivity() {
 
 
 
-        (findViewById(R.id.queryBatteryInfo) as Button).setOnClickListener {
+        (findViewById(R.id.queryBatteryInfo) as Button)?.setOnClickListener {
             BatteryRequestManager2.getInstance().queryBatteryInfo(object : CallbackWithOneParam<BatteryInfoCmdParams> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "queryBatteryInfo recv onFailure ")
@@ -209,7 +200,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setBattery) as Button).setOnClickListener {
+        (findViewById(R.id.setBattery) as Button)?.setOnClickListener {
             BatteryRequestManager2.getInstance().setBatteryDisCharge(2, object : CallbackWithOneParam<CommandInfoInternal> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "setBatteryDischargeDay recv onFailure ")
@@ -220,7 +211,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.queryBatteryHistory) as Button).setOnClickListener {
+        (findViewById(R.id.queryBatteryHistory) as Button)?.setOnClickListener {
             BatteryRequestManager2.getInstance().queryBatteryHistory(object : CallbackWithOneParam<IntArray> {
                 override fun onSuccess(data: IntArray) {
                     Log.d(TAG, "queryBatteryHistory recv data->" + data.toString())
@@ -231,7 +222,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setLowBatteryWarning) as Button).setOnClickListener {
+        (findViewById(R.id.setLowBatteryWarning) as Button)?.setOnClickListener {
             BatteryRequestManager2.getInstance().setLowBatteryWarning(0.25f, object : CallbackWithOneParam<Float> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "queryBatteryHistory recv onFailure ")
@@ -244,6 +235,28 @@ class TestActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            val spinner = findViewById<Spinner>(R.id.Spinner)
+            if (spinner != null) {
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                        if (view != null) {
+                            // 在这里处理您的逻辑
+                            index = position
+                        }
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun initView() {
         (findViewById(R.id.queryVisual) as TextView).setOnClickListener {

@@ -8,7 +8,14 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.autel.AutelNet2.dsp.controller.DspRFManager2;
+import com.autel.AutelNet2.dsp.data.MatchStatusEnum;
+import com.autel.AutelNet2.dsp.data.PairReportBean;
+import com.autel.common.CallbackWithOneParam;
+import com.autel.common.dsp.evo.AircraftRole;
+import com.autel.common.error.AutelError;
 import com.autel.common.product.AutelProductType;
 import com.autel.sdk.Autel;
 import com.autel.sdk.ProductConnectListener;
@@ -17,6 +24,7 @@ import com.autel.sdksample.evo.G2Layout;
 import com.autel.sdksample.premium.XStarPremiumLayout;
 import com.autel.sdksample.util.FileUtils;
 import com.autel.sdksample.xstar.XStarLayout;
+import com.autel.util.log.AutelLog;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -40,7 +48,7 @@ public class ProductActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        setContentView(createView(AutelProductType.EVO));
+        //setContentView(createView(AutelProductType.EVO));
         Log.v("productType", "ProductActivity onCreate ");
         //*/
         Autel.setProductConnectListener(new ProductConnectListener() {
@@ -91,7 +99,7 @@ public class ProductActivity extends AppCompatActivity {
         FileUtils.Initialize(getAppContext(),fileConfig2,"autel288_7_final.weights");
         FileUtils.Initialize(getAppContext(),fileConfig3,"autel13.cfg");
         FileUtils.Initialize(getAppContext(),fileConfig4,"autel13.backup");
-
+        DspRFManager2.getInstance().addPairReportListener(pairReportListener);
         Log.v("lifeTest", "onCreate");
     }
 
@@ -169,4 +177,32 @@ public class ProductActivity extends AppCompatActivity {
             context.startActivity(i);
         }
     }
+
+    public void setMasterFequency(View view) {
+        DspRFManager2.getInstance().bingAircraftToRemote(AircraftRole.MASTER);
+    }
+
+    public void setFrequency(View view) {
+        DspRFManager2.getInstance().bingAircraftToRemote(AircraftRole.SLAVER);
+    }
+
+    private final CallbackWithOneParam<PairReportBean> pairReportListener = new CallbackWithOneParam<PairReportBean>() {
+        @Override
+        public void onSuccess(PairReportBean data) {
+            AutelLog.debug_i("lifeTest", "PairReport -> " + data.toString());
+            MatchStatusEnum statusEnum = MatchStatusEnum.find(data.Status);
+            runOnUiThread(() -> {
+                if (statusEnum == MatchStatusEnum.SUCCESS) {
+                    Toast.makeText(getAppContext(), "frequency matching success", Toast.LENGTH_LONG).show();
+                } else if (statusEnum == MatchStatusEnum.TIMEOUT) {
+                    Toast.makeText(getAppContext(), "frequency matching fail", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        @Override
+        public void onFailure(AutelError error) {
+            Toast.makeText(getAppContext(), "frequency matching error" + error.getDescription(), Toast.LENGTH_LONG).show();
+        }
+    };
 }

@@ -5,6 +5,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -15,9 +16,9 @@ import com.autel.common.flycontroller.visual.AvoidanceRadarInfo;
 import com.autel.common.flycontroller.visual.VisualSettingInfo;
 import com.autel.common.flycontroller.visual.VisualSettingSwitchblade;
 import com.autel.sdk.flycontroller.AutelFlyController;
-import com.autel.sdk.flycontroller.EvoFlyController;
+import com.autel.sdk.flycontroller.Evo2FlyController;
 import com.autel.sdk.product.BaseProduct;
-import com.autel.sdk.product.EvoAircraft;
+import com.autel.sdk.product.Evo2Aircraft;
 import com.autel.sdksample.R;
 import com.autel.sdksample.base.FlyControllerActivity;
 import com.autel.sdksample.evo.adapter.LandingGearStateAdapter;
@@ -28,15 +29,15 @@ import com.autel.sdksample.evo.adapter.VisualSettingSwitchBladeAdapter;
  */
 
 public class G2FlyControllerActivity extends FlyControllerActivity {
-    private EvoFlyController mEvoFlyController;
+    private Evo2FlyController mEvoFlyController;
     LandingGearStateAdapter mLandingGearStateAdapter;
-//    LandingGearState selectedLandingGearState = LandingGearState.UNKNOWN;
+    //    LandingGearState selectedLandingGearState = LandingGearState.UNKNOWN;
     VisualSettingSwitchblade mVisualSettingSwitchblade = VisualSettingSwitchblade.UNKNOWN;
     private Switch visualSettingEnableState;
 
     @Override
     protected AutelFlyController initController(BaseProduct product) {
-        mEvoFlyController = ((EvoAircraft) product).getFlyController();
+        mEvoFlyController = ((Evo2Aircraft) product).getFlyController();
         return mEvoFlyController;
     }
 
@@ -81,6 +82,10 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void setFlyControllerListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setFlyControllerInfoListener(new CallbackWithOneParam<EvoFlyControllerInfo>() {
             @Override
             public void onSuccess(EvoFlyControllerInfo data) {
@@ -93,7 +98,11 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
             }
         });
 
-//        mEvoFlyController.setVisualViewPointCoordListener(new CallbackWithOneParam<ViewPointTargetArea>() {
+//        if (mEvoFlyController == null) {
+//            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+//            return;
+//        }
+        //mEvoFlyController.setVisualViewPointCoordListener(new CallbackWithOneParam<ViewPointTargetArea>() {
 //            @Override
 //            public void onSuccess(ViewPointTargetArea data) {
 //                logOut("setVisualViewPointCoordListener data " + data);
@@ -107,11 +116,21 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void resetFlyControllerListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setFlyControllerInfoListener(null);
     }
 
     public void setLandingGearState(View view) {
-//        mEvoFlyController.setLandingGearState(selectedLandingGearState, new CallbackWithNoParam() {
+//        if (mEvoFlyController == null) {
+//        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+//        return;
+//    }
+// mEvoFlyController.setLandingGearState(selectedLandingGearState,new
+
+//    CallbackWithNoParam() {
 //            @Override
 //            public void onSuccess() {
 //                logOut("setLandingGearState onSuccess " + selectedLandingGearState);
@@ -125,10 +144,14 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void droneArmed(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.droneArmed(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
-                logOut("droneArmed onSuccess " );
+                logOut("droneArmed onSuccess ");
             }
 
             @Override
@@ -139,10 +162,14 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void droneDisarmed(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.droneDisarmed(new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
-                logOut("droneDisarmed onSuccess " );
+                logOut("droneDisarmed onSuccess ");
             }
 
             @Override
@@ -153,6 +180,10 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void setVisualWarnListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setVisualWarnListener(new CallbackWithOneParam<VisualWarningInfo>() {
             @Override
             public void onSuccess(VisualWarningInfo warning) {
@@ -167,10 +198,18 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void resetVisualWarnListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setVisualWarnListener(null);
     }
 
     public void setRadarInfoListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setAvoidanceRadarInfoListener(new CallbackWithOneParam<AvoidanceRadarInfo>() {
             @Override
             public void onSuccess(AvoidanceRadarInfo radarInfo) {
@@ -185,8 +224,12 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void setVisualSettingEnable(View view) {
-        if(mVisualSettingSwitchblade == VisualSettingSwitchblade.SET_VIEW_POINT_COORD){
-            mEvoFlyController.setVisualViewPointCoordinate(30f,30f, 50f,new CallbackWithNoParam() {
+        if (mVisualSettingSwitchblade == VisualSettingSwitchblade.SET_VIEW_POINT_COORD) {
+            if (mEvoFlyController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mEvoFlyController.setVisualViewPointCoordinate(30f, 30f, 50f, new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
                     logOut("setVisualSettingEnable onSuccess ");
@@ -197,7 +240,11 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
                     logOut("setVisualSettingEnable onFailure " + error.getDescription());
                 }
             });
-        }else {
+        } else {
+            if (mEvoFlyController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
             mEvoFlyController.setVisualSettingEnable(mVisualSettingSwitchblade, visualSettingEnableState.isEnabled(), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
@@ -213,6 +260,10 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void getVisualSettingEnable(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.getVisualSettingInfo(new CallbackWithOneParam<VisualSettingInfo>() {
             @Override
             public void onSuccess(VisualSettingInfo data) {
@@ -228,6 +279,10 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
 
     public void setVisualViewPointSpeed(View view) {
         String value = ((EditText) findViewById(R.id.VisualViewPointSpeed)).getText().toString();
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setVisualViewPointSpeed(Float.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -242,6 +297,10 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void resetRadarInfoListener(View view) {
+        if (mEvoFlyController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+            return;
+        }
         mEvoFlyController.setAvoidanceRadarInfoListener(null);
     }
 }

@@ -3,6 +3,7 @@ package com.autel.sdksample.evo;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -15,7 +16,7 @@ import com.autel.common.error.AutelError;
 import com.autel.sdk.dsp.AutelDsp;
 import com.autel.sdk.dsp.EvoDsp;
 import com.autel.sdk.product.BaseProduct;
-import com.autel.sdk.product.EvoAircraft;
+import com.autel.sdk.product.Evo2Aircraft;
 import com.autel.sdksample.R;
 import com.autel.sdksample.base.DspActivity;
 import com.autel.sdksample.evo.adapter.BandModeAdapter;
@@ -36,7 +37,7 @@ public class G2DspActivity extends DspActivity {
 
     @Override
     protected AutelDsp initController(BaseProduct product) {
-        mXStarEvoDsp = ((EvoAircraft) product).getDsp();
+        mXStarEvoDsp = ((Evo2Aircraft) product).getDsp();
         return mXStarEvoDsp;
     }
 
@@ -75,6 +76,10 @@ public class G2DspActivity extends DspActivity {
         findViewById(R.id.setBandwidthInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.setBandwidthInfo(selectedBandMode, selectedBandwidth);
             }
         });
@@ -94,6 +99,10 @@ public class G2DspActivity extends DspActivity {
         findViewById(R.id.setTransferMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.setTransferMode(selectedTransferMode, new CallbackWithNoParam() {
                     @Override
                     public void onSuccess() {
@@ -110,6 +119,10 @@ public class G2DspActivity extends DspActivity {
         findViewById(R.id.getTransferMode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.getTransferMode(new CallbackWithOneParam<TransferMode>() {
                     @Override
                     public void onSuccess(TransferMode data) {
@@ -127,6 +140,10 @@ public class G2DspActivity extends DspActivity {
         findViewById(R.id.setDspInfoListener).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.setDspInfoListener(new CallbackWithOneParam<EvoDspInfo>() {
                     @Override
                     public void onSuccess(EvoDspInfo g2DspInfo) {
@@ -143,12 +160,20 @@ public class G2DspActivity extends DspActivity {
         findViewById(R.id.resetDspInfoListener).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.setDspInfoListener(null);
             }
         });
         findViewById(R.id.getDeviceVersionInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mXStarEvoDsp == null) {
+                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mXStarEvoDsp.getDeviceVersionInfo(new CallbackWithOneParam<List<DeviceVersionInfo>>() {
                     @Override
                     public void onSuccess(List<DeviceVersionInfo> data) {

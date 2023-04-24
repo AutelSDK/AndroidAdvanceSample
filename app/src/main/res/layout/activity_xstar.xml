@@ -203,7 +203,40 @@
                     android:text="Upgrade" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/mainFequency"
+                    android:text="Master Frequency"
+                    android:textAllCaps="false"
+                    android:onClick="setMasterFequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/setFequency"
+                    android:text="Slave Frequency"
+                    android:textAllCaps="false"
+                    android:onClick="setFrequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
+
     </ScrollView>
 
 

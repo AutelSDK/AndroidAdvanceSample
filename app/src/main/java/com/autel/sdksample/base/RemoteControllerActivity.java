@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autel.common.CallbackWithNoParam;
 import com.autel.common.CallbackWithOneParam;
@@ -155,6 +156,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 String value = yawCoefficientRange.getText().toString();
                 if (isEmpty(value)) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     RemoteControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     RangePair<Float> support = parameterRangeManager.getYawCoefficient();
                     yawCoefficientRange.setText("yawCoefficient from " + support.getValueFrom() + "  to  " + support.getValueTo());
@@ -182,6 +187,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
                 }
 
                 if (isEmpty(dialAdjustSpeedRange.getText().toString())) {
+                    if (mController == null) {
+                        Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     RemoteControllerParameterRangeManager rangeManager = mController.getParameterRangeManager();
                     RangePair<Integer> support = rangeManager.getDialAdjustSpeed();
                     dialAdjustSpeedRange.setText("dial adjust speed from " + support.getValueFrom() + " to " + support.getValueTo());
@@ -203,6 +212,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             @Override
             public void onClick(View v) {
                 String value = dialAdjustSpeed.getText().toString();
+                if (mController == null) {
+                    Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mController.setGimbalDialAdjustSpeed(isEmpty(value) ? 10 : Integer.valueOf(value), new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError rcError) {
@@ -237,6 +250,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 
 
     public void setRCLanguage(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setLanguage(remoteControllerLanguage, new CallbackWithNoParam() {
 
             @Override
@@ -252,6 +269,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getRCLanguage(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getLanguage(new CallbackWithOneParam<RemoteControllerLanguage>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -260,12 +281,16 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 
             @Override
             public void onSuccess(RemoteControllerLanguage rcLanguage) {
-                logOut("getLanguage onSuccess " + rcLanguage.toString());
+                logOut("getLanguage onSuccess " + rcLanguage);
             }
         });
     }
 
     public void enterBinding(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.enterPairing(new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -280,10 +305,18 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void exitBinding(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.exitPairing();
     }
 
     public void setRFPower(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setRFPower(rfPower, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -298,6 +331,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getRFPower(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getRFPower(new CallbackWithOneParam<RFPower>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -312,6 +349,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getTeacherStudentMode(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getTeachingMode(new CallbackWithOneParam<TeachingMode>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -326,6 +367,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void setTeacherStudentMode(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setTeachingMode(teachingMode, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -340,6 +385,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void startCalibration(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setStickCalibration(RemoteControllerStickCalibration.START, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -354,6 +403,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void saveCalibration(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setStickCalibration(RemoteControllerStickCalibration.COMPLETE, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -382,6 +435,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 //    }
 
     public void getRCLengthUnit(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getLengthUnit(new CallbackWithOneParam<RemoteControllerParameterUnit>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -396,6 +453,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void setRCLengthUnit(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setParameterUnit(parameterUnit, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -411,6 +472,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void setRCCommandStickMode(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setCommandStickMode(commandStickMode, new CallbackWithNoParam() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -425,6 +490,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getRCCommandStickMode(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getCommandStickMode(new CallbackWithOneParam<RemoteControllerCommandStickMode>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -440,6 +509,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 
     public void setYawCoefficient(View view) {
         String value = yawCoefficientValue.getText().toString();
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setYawCoefficient(isEmpty(value) ? 0.3f : Float.valueOf(value), new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
@@ -454,6 +527,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getYawCoefficient(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getYawCoefficient(new CallbackWithOneParam<Float>() {
             @Override
             public void onSuccess(Float aDouble) {
@@ -468,6 +545,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getVersionInfo(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getVersionInfo(new CallbackWithOneParam<RemoteControllerVersionInfo>() {
             @Override
             public void onSuccess(RemoteControllerVersionInfo versionInfo) {
@@ -482,6 +563,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void getSerialNumber(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.getSerialNumber(new CallbackWithOneParam<String>() {
             @Override
             public void onSuccess(String serialNumber) {
@@ -497,6 +582,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 
 
     public void setRemoteButtonControllerMonitor(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setRemoteButtonControllerListener(new CallbackWithOneParam<RemoteControllerNavigateButtonEvent>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -511,10 +600,18 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void resetRemoteButtonControllerMonitor(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setRemoteButtonControllerListener(null);
     }
 
     public void setRCInfoDataMonitor(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setInfoDataListener(new CallbackWithOneParam<RemoteControllerInfo>() {
             @Override
             public void onFailure(AutelError rcError) {
@@ -529,10 +626,18 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void resetRCInfoDataMonitor(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setInfoDataListener(null);
     }
 
     public void setRemoteControllerConnectStateListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setConnectStateListener(new CallbackWithOneParam<RemoteControllerConnectState>() {
             @Override
             public void onFailure(AutelError error) {
@@ -546,10 +651,18 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void resetRemoteControllerConnectStateListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setConnectStateListener(null);
     }
 
     public void setControlMenuListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setControlMenuListener(new CallbackWithOneParam<int[]>() {
             @Override
             public void onSuccess(int[] data) {
@@ -564,6 +677,10 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
     }
 
     public void resetControlMenuListener(View view) {
+        if (mController == null) {
+            Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+            return;
+        }
         mController.setControlMenuListener(null);
     }
 }

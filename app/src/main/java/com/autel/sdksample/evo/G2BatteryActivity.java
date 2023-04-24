@@ -9,7 +9,6 @@ import com.autel.common.error.AutelError;
 import com.autel.sdk.battery.AutelBattery;
 import com.autel.sdk.battery.EvoBattery;
 import com.autel.sdk.product.BaseProduct;
-import com.autel.sdk.product.EvoAircraft;
 import com.autel.sdksample.R;
 import com.autel.sdksample.base.BatteryActivity;
 
