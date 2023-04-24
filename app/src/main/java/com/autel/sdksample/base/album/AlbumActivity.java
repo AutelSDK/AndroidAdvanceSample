@@ -7,6 +7,7 @@ import android.os.Environment;
 
 import androidx.annotation.NonNull;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -340,12 +341,17 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
                         for (MediaInfo item : data) {
                             Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
                         }
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mediaListAdapter.setData(data);
+                                mediaList.setAdapter(mediaListAdapter);
+                                videoResolutionFromHttpHeaderAdapter.setData(data);
+                                videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                                videoList.setData(data);
+                                videoDownloadList.setAdapter(videoList);
+                            }
+                        });
                     }
                 });
             }
@@ -371,12 +377,15 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
                         for (MediaInfo item : data) {
                             Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
                         }
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
+                        runOnUiThread(() -> {
+                            mediaListAdapter.setData(data);
+                            mediaList.setAdapter(mediaListAdapter);
+                            videoResolutionFromHttpHeaderAdapter.setData(data);
+                            videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                            videoList.setData(data);
+                            videoDownloadList.setAdapter(videoList);
+                        });
+
                     }
                 });
             }
@@ -402,13 +411,14 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
                         for (MediaInfo item : data) {
                             Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
                         }
-
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
+                        runOnUiThread(() -> {
+                            mediaListAdapter.setData(data);
+                            mediaList.setAdapter(mediaListAdapter);
+                            videoResolutionFromHttpHeaderAdapter.setData(data);
+                            videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                            videoList.setData(data);
+                            videoDownloadList.setAdapter(videoList);
+                        });
                     }
                 });
             }
@@ -541,18 +551,23 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
             if (!isEmpty(videoPath)) {
                 videoPath = videoPath.substring(videoPath.lastIndexOf("/") + 1);
             }
-            okHttpManager.download(media2Download.getLargeThumbnail(), Environment.getExternalStorageDirectory().getPath() + "/album/albumtest/" + videoPath, new ResponseCallBack<File>() {
-                @Override
-                public void onSuccess(File file) {
-                    initLocalFileList();
-                    logOut("file " + file.getPath());
-                }
+            if (!TextUtils.isEmpty(media2Download.getLargeThumbnail())) {
+                okHttpManager.download(media2Download.getLargeThumbnail(), Environment.getExternalStorageDirectory().getPath() + "/album/albumtest/" + videoPath, new ResponseCallBack<File>() {
+                    @Override
+                    public void onSuccess(File file) {
+                        initLocalFileList();
+                        logOut("file " + file.getPath());
+                    }
 
-                @Override
-                public void onFailure(Throwable throwable) {
-                    logOut("download onFailure " + throwable.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        logOut("download onFailure " + throwable.getMessage());
+                    }
+                });
+            }else{
+                logOut("media2Download.getLargeThumbnail() is null");
+            }
+
         } else {
             logOut("video to be download is null");
         }

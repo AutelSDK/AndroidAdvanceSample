@@ -48,7 +48,7 @@ public class ProductActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        //setContentView(createView(AutelProductType.EVO));
+        setContentView(createView(AutelProductType.EVO));
         Log.v("productType", "ProductActivity onCreate ");
         //*/
         Autel.setProductConnectListener(new ProductConnectListener() {
