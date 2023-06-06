@@ -10,6 +10,7 @@ import com.autel.sdksample.TestActivity;
 import com.autel.sdksample.base.CodecActivity;
 import com.autel.sdksample.base.album.AlbumActivity;
 import com.autel.sdksample.base.camera.CameraActivity;
+import com.autel.sdksample.base.mission.AMapMissionActivity;
 import com.autel.sdksample.base.mission.MissionActivity;
 import com.autel.sdksample.evo.avoid.AvoidActivity;
 import com.autel.sdksample.evo.visual.VisualActivity;
@@ -66,7 +67,7 @@ public class XStarLayout {
         mLayout.findViewById(R.id.missionTest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, MissionActivity.class));
+                mContext.startActivity(new Intent(mContext, AMapMissionActivity.class));
             }
         });
         mLayout.findViewById(R.id.BatteryTest).setOnClickListener(new View.OnClickListener() {

@@ -24,94 +24,23 @@ import java.util.List;
 
 
 public class AMapMissionActivity extends MapActivity {
-    final String TAG = getClass().getSimpleName();
-    MapView aMapView;
-    private AMap mAmap;
-    boolean isFirstChangeToPhone = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setMapContentView(R.layout.activity_mission_amap);
-        aMapView = (MapView) findViewById(R.id.aMapView);
-        aMapView.onCreate(savedInstanceState);
-        mAmap = aMapView.getMap();
-        attachTapListener();
     }
 
-    public void onResume() {
-        super.onResume();
-        aMapView.onResume();
-    }
-
-    public void onPause() {
-        super.onPause();
-        aMapView.onPause();
-    }
-
-
-    public void onDestroy() {
-        super.onDestroy();
-        detachTapListener();
-        aMapView.onDestroy();
-        resetUI();
-    }
-
-    private void resetUI() {
-        mMarkerList.clear();
-    }
-
-    private void attachTapListener() {
-        if (mAmap == null) {
-            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
-            return;
-        }
-        mAmap.setOnMapClickListener(new AMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                onAbsMapClick(latLng.latitude, latLng.longitude);
-            }
-        });
-        mAmap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                int index = mMarkerList.indexOf(marker);
-                if (index >= 0 && index < mMarkerList.size()) {
-                    markerClick(index);
-                }
-                return true;
-            }
-        });
-    }
-
-    private void detachTapListener() {
-        if (mAmap == null) {
-            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
-            return;
-        }
-        mAmap.setOnMapClickListener(null);
-    }
 
     @Override
     protected void phoneLocationChanged(Location location) {
         AutelLatLng all = MapRectifyUtil.wgs2gcj(new AutelLatLng(location.getLatitude(), location.getLongitude()));
-        LatLng latLng = new LatLng(all.getLatitude(), all.getLongitude());
-        if (mAmap == null || mAmap.getCameraPosition() == null) {
-            return;
-        }
-        if (isFirstChangeToPhone) {
-            mAmap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
-            mAmap.moveCamera(com.amap.api.maps.CameraUpdateFactory.zoomTo(MapInitZoomSize));
-            isFirstChangeToPhone = false;
-        }
-        drawPhoneMarker(latLng);
     }
 
     @Override
     protected void updateAircraftLocation(double lat, double lot, AttitudeInfo info) {
         AutelLatLng latLng = MapRectifyUtil.wgs2gcj(new AutelLatLng(lat, lot));
         LatLng lng = new LatLng(latLng.latitude, latLng.longitude);
-        drawDroneMarker(lng,info);
     }
 
 
@@ -119,17 +48,7 @@ public class AMapMissionActivity extends MapActivity {
 
     @Override
     public void addWayPointMarker(double lat, double lot) {
-        LatLng latlng = new LatLng(lat, lot);
-        int size = mMarkerList.size();
-        if (size > 0) {
-            addWayPointLine(mMarkerList.get(size - 1).getPosition(), latlng);
-        }
 
-        Marker temp = addMarkerWithLabel(latlng);
-        if (temp != null) {
-            temp.setDraggable(true);
-            mMarkerList.add(temp);
-        }
     }
 
 
@@ -146,7 +65,6 @@ public class AMapMissionActivity extends MapActivity {
         markerOption.draggable(false);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.favor_marker_point);
         markerOption.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
-        mOrbitMarker = mAmap.addMarker(markerOption);
 
     }
 
@@ -171,76 +89,7 @@ public class AMapMissionActivity extends MapActivity {
         }
     }
 
-    private Marker addMarkerWithLabel(LatLng latlng) {
-        MarkerOptions markerOption = new MarkerOptions();
-        markerOption.position(latlng);
-        markerOption.draggable(false);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.marker_point);
-        markerOption.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
-        if (mAmap == null) {
-            Toast.makeText(getApplicationContext(), "Amap is null ", Toast.LENGTH_LONG).show();
-            return null;
-        }
-        return mAmap.addMarker(markerOption);
-    }
-
     private List<Polyline> polyLines = new ArrayList<>();
 
-    private Polyline addWayPointLine(LatLng start, LatLng end) {
-        Polyline a = mAmap.addPolyline((new PolylineOptions()).add(start, end));
-        a.setColor(Color.GREEN);
-        a.setWidth(10);
-        polyLines.add(a);
-        return a;
-    }
 
-    Marker mDroneMarker;
-
-    private void drawDroneMarker(LatLng dronell, AttitudeInfo info) {
-        synchronized (AMapMissionActivity.class) {
-            if (mDroneMarker == null) {
-                MarkerOptions markerOption = new MarkerOptions();
-                markerOption.position(dronell);
-                markerOption.draggable(false);
-                markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
-                        R.mipmap.drone_location_icon)));
-                markerOption.anchor(0.5f, 0.5f);
-                if (null != mAmap) {
-                    mDroneMarker = mAmap.addMarker(markerOption);
-                }
-            } else {
-                mDroneMarker.setPosition(dronell);
-                mDroneMarker.setToTop();
-            }
-            if (null != info) {
-                double degree = info.getYaw();
-                if (degree < 0) {
-                    degree = degree + 360;
-                }
-                if (mDroneMarker != null && mAmap != null) {
-                    if (mAmap.getCameraPosition() != null) {
-                        mDroneMarker.setRotateAngle((float) degree);
-                    }
-                }
-            }
-        }
-    }
-
-    Marker mPhoneMarker;
-
-    private void drawPhoneMarker(LatLng phonell) {
-        if (mPhoneMarker == null) {
-            MarkerOptions markerOption = new MarkerOptions();
-            markerOption.position(phonell);
-            markerOption.draggable(false);
-//            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
-//                    R.mipmap.drone_location_icon)));
-//            markerOption.anchor(0.5f, 0.5f);
-            if(mAmap != null){
-                mPhoneMarker = mAmap.addMarker(markerOption);
-            }
-        } else {
-            mPhoneMarker.setPosition(phonell);
-        }
-    }
 }
