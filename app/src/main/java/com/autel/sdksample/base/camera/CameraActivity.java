@@ -17,7 +17,6 @@ import com.autel.common.CallbackWithTwoParams;
 import com.autel.common.camera.CameraProduct;
 import com.autel.common.error.AutelError;
 import com.autel.common.video.OnRenderFrameInfoListener;
-import com.autel.internal.video.core.decoder2.VideoCacheManager;
 import com.autel.sdk.camera.AutelBaseCamera;
 import com.autel.sdk.camera.AutelCameraManager;
 import com.autel.sdk.product.BaseProduct;
@@ -137,10 +136,10 @@ public class CameraActivity extends AppCompatActivity {
                     state = true;
                     AutelCodecView.setOverExposure(false, R.drawable.expo1280);
                 }
-                if(VideoCacheManager.instance().ptsMap.containsKey(pts)){
+/*                if(VideoCacheManager.instance().ptsMap.containsKey(pts)){
                     //AutelLog.tag("DDL").b().d("每一帧cost Time:"+(System.currentTimeMillis() - VideoCacheManager.instance().ptsMap.get(pts))+"ms, pts:"+pts+" current Time:"+System.currentTimeMillis()+" size:"+VideoCacheManager.instance().ptsMap.size());
                     VideoCacheManager.instance().ptsMap.remove(pts);
-                }
+                }*/
             }
 
             @Override
