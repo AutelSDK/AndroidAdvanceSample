@@ -20,7 +20,7 @@ android {
 //        pickFirst 'lib/arm64-v8a/libAutelUtil.so'
     }
     defaultConfig {
-        applicationId "com.dronesense.pilot"
+        applicationId "com.autel.maxlink"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
