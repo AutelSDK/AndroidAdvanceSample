@@ -10,25 +10,24 @@ android {
             storePassword 'android'
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 33
+//    buildToolsVersion '28.0.3'
 
     packagingOptions {
 //        pickFirst 'lib/armeabi-v7a/libwhitename.so'
-        pickFirst 'lib/arm64-v8a/libwhitename.so'
+//        pickFirst 'lib/arm64-v8a/libwhitename.so'
 //        pickFirst 'lib/armeabi-v7a/libAutelUtil.so'
-        pickFirst 'lib/arm64-v8a/libAutelUtil.so'
+//        pickFirst 'lib/arm64-v8a/libAutelUtil.so'
     }
     defaultConfig {
-        applicationId "com.autel.maxlink"
-        minSdkVersion 19
-        //noinspection ExpiredTargetSdkVersion
+        applicationId "com.dronesense.pilot"
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "V1.0.1.40"
         multiDexEnabled true
         signingConfig signingConfigs.config
-        ndkVersion '21.4.7075529'
+        ndkVersion '21.4.7075529' // ���� NDK �汾
     }
     buildTypes {
         release {
@@ -48,10 +47,6 @@ android {
     }
     productFlavors {
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 repositories {
@@ -67,12 +62,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //    testCompile 'junit:junit:4.12'
     //*
-//    implementation project(':sdk')
+    //implementation project(':sdk')
 
     implementation(name: "autel-sdk-release", ext: "aar")
 
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
     //noinspection GradleCompatible
 //    implementation 'com.android.support:appcompat-v7:25.3.1'
     implementation  'com.google.android.gms:play-services-maps:17.0.1'
@@ -86,10 +80,10 @@ dependencies {
 
     implementation('com.squareup.okhttp3:okhttp:4.7.2')
     //    compile autelSdkDependencies.okIO
-    api 'io.reactivex.rxjava2:rxjava:2.1.2'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    api 'io.reactivex.rxjava2:rxjava:2.1.2'
+//    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
 //    api files('libs/commons-codec-1.5.jar')
-    implementation 'org.greenrobot:eventbus:3.0.0'
+//    api 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.7'
 //    api "androidx.annotation:annotation:1.0.0"
 }
